@@ -1,19 +1,19 @@
-﻿using System.IO;
+﻿using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Buffers;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Logging.Abstractions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Primitives;
 using Ndjson.AsyncStreams.AspNetCore.Mvc.Formatters;
 using Ndjson.AsyncStreams.AspNetCore.Mvc.NewtonsoftJson.Formatters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Xunit;
 
 namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Tests.Unit.Formatters
@@ -79,7 +79,7 @@ namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Tests.Unit.Formatters
         private static OutputFormatterWriteContext PrepareOutputFormatterCanWriteContext(string contentType, object @object = null)
         {
             HttpContext httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers.Add("Accept", contentType);
+            httpContext.Request.Headers.Append("Accept", contentType);
             httpContext.Response.Body = new MemoryStream();
 
             return new OutputFormatterWriteContext(
@@ -87,7 +87,8 @@ namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Tests.Unit.Formatters
                 CreateWriterForOutputFormatterWriteContext,
                 @object is null ? typeof(IAsyncEnumerable<ValueType>) : @object.GetType(),
                 @object ?? GetValuesAsync()
-            ) { ContentType = new StringSegment(httpContext.Request.Headers["Accept"]) };
+            )
+            { ContentType = new StringSegment(httpContext.Request.Headers["Accept"]) };
         }
 
         [Theory]

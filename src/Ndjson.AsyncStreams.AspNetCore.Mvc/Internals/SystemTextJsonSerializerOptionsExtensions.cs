@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using System.Text.Encodings.Web;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
 
 namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Internals
 {
@@ -11,9 +11,7 @@ namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Internals
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-#endif
-
-#if NET5_0 || NET6_0
+#else
         private static readonly JsonSerializerOptions _defaultJsonSerializerOptions = new(JsonSerializerDefaults.Web);
 #endif
 
@@ -40,9 +38,7 @@ namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Internals
             {
                 copiedOptions.Converters.Add(serializerOptions.Converters[i]);
             }
-#endif
-
-#if NET5_0 || NET6_0
+#else
             var copiedOptions = new JsonSerializerOptions(serializerOptions);
 #endif
             copiedOptions.Encoder = encoder;

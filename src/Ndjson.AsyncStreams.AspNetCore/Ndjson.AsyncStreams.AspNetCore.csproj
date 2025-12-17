@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Ndjson.AsyncStreams.AspNetCore is a solution for working with asynchronous streaming data sources in ASP.NET Core (Minimal APIs) using NDJSON (Newline Delimited JSON).</Description>
     <VersionPrefix>1.1.0</VersionPrefix>
     <VersionSuffix></VersionSuffix>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <AssemblyTitle>Ndjson.AsyncStreams.AspNetCore</AssemblyTitle>
     <AssemblyName>Ndjson.AsyncStreams.AspNetCore</AssemblyName>
     <PackageId>Ndjson.AsyncStreams.AspNetCore</PackageId>
@@ -11,5 +11,8 @@
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="DotNet.ReproducibleBuilds" Version="1.2.39" />
   </ItemGroup>
 </Project>

@@ -1,12 +1,12 @@
-﻿using System.IO;
-using System.Buffers;
+﻿using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Ndjson.AsyncStreams.AspNetCore.Mvc.Internals;
 using Ndjson.AsyncStreams.AspNetCore.Mvc.NewtonsoftJson.Internals;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Xunit;
 
 namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Tests.Unit
@@ -39,9 +39,7 @@ namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Tests.Unit
                 PropertyNameCaseInsensitive = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-#endif
-
-#if NET8_0 || NET9_0
+#else
             JsonSerializerOptions jsonSerializerOptions = new(JsonSerializerDefaults.Web);
 #endif
 
