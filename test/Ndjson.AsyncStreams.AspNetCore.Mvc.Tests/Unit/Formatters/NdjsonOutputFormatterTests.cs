@@ -79,7 +79,7 @@ namespace Ndjson.AsyncStreams.AspNetCore.Mvc.Tests.Unit.Formatters
         private static OutputFormatterWriteContext PrepareOutputFormatterCanWriteContext(string contentType, object @object = null)
         {
             HttpContext httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers.Add("Accept", contentType);
+            httpContext.Request.Headers.Append("Accept", contentType);
             httpContext.Response.Body = new MemoryStream();
 
             return new OutputFormatterWriteContext(
