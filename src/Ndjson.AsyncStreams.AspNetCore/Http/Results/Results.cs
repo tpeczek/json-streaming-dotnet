@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Collections.Generic;
+using Ndjson.AsyncStreams.AspNetCore.Internals;
 using Ndjson.AsyncStreams.AspNetCore.Http.HttpResults;
 
 namespace Microsoft.AspNetCore.Http;
@@ -9,9 +10,6 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 public static partial class NdjsonResultExtensions
 {
-    private const string NDJSON_CONTENT_TYPE = "application/x-ndjson";
-    private const string JSONL_CONTENT_TYPE = "application/jsonl";
-
     /// <summary>
     /// Creates a <see cref="IResult"/> that on execution will write the given <see cref="IAsyncEnumerable{T}"/> as NDJSON to the response.
     /// </summary>
@@ -24,7 +22,7 @@ public static partial class NdjsonResultExtensions
     /// <remarks>Callers should cache an instance of serializer settings to avoid recreating cached data with each call.</remarks>
     public static IResult Ndjson<T>(this IResultExtensions resultExtensions, IAsyncEnumerable<T>? stream, JsonSerializerOptions? options = null, int? statusCode = null)
     {
-        return new NdjsonAsyncEnumerableHttpResult<T>(stream, NDJSON_CONTENT_TYPE, options, statusCode);
+        return new NdjsonAsyncEnumerableHttpResult<T>(stream, MediaTypeHeaderValues.APPLICATION_NDJSON_MEDIA_TYPE, options, statusCode);
     }
 
     /// <summary>
@@ -39,6 +37,6 @@ public static partial class NdjsonResultExtensions
     /// <remarks>Callers should cache an instance of serializer settings to avoid recreating cached data with each call.</remarks>
     public static IResult Jsonl<T>(this IResultExtensions resultExtensions, IAsyncEnumerable<T>? stream, JsonSerializerOptions? options = null, int? statusCode = null)
     {
-        return new NdjsonAsyncEnumerableHttpResult<T>(stream, JSONL_CONTENT_TYPE, options, statusCode);
+        return new NdjsonAsyncEnumerableHttpResult<T>(stream, MediaTypeHeaderValues.APPLICATION_JSONL_MEDIA_TYPE, options, statusCode);
     }
 }
