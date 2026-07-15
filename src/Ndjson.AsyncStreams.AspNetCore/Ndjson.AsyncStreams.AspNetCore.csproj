@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Ndjson.AsyncStreams.AspNetCore is a solution for working with asynchronous streaming data sources in ASP.NET Core (Minimal APIs) using NDJSON (Newline Delimited JSON).</Description>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <VersionSuffix></VersionSuffix>
     <TargetFramework>net7.0</TargetFramework>
     <AssemblyTitle>Ndjson.AsyncStreams.AspNetCore</AssemblyTitle>
